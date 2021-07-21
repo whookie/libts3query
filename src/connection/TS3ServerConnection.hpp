@@ -15,16 +15,9 @@ namespace ts3query::connection
 class TS3ServerConnection : public ts3query::base::TS3Object
 {
 public:
-    TS3ServerConnection(
-        const std::string& host,
-        uint16_t port,
-        const std::string& user,
-        const std::string& passwd,
-        std::unique_ptr<transport::TS3BaseTransport> transport
-    );
+    TS3ServerConnection(std::unique_ptr<transport::TS3BaseTransport> transport);
+    TS3ServerConnection(const TS3ServerConnection&);
     ~TS3ServerConnection() = default;
-
-    static std::unique_ptr<TS3ServerConnection> telnet(const std::string& host, uint16_t port);
 
     // Connect
     void connect();

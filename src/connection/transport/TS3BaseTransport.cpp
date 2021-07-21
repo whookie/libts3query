@@ -4,8 +4,8 @@
 
 namespace ts3query::connection::transport {
 
-TS3BaseTransport::TS3BaseTransport(const std::string& host, uint16_t port)
-    : m_host(host), m_port(port) {}
+TS3BaseTransport::TS3BaseTransport(const std::string& host, uint16_t port, const std::string& user, const std::string& passwd)
+    : m_host(host), m_port(port), m_user(user), m_passwd(passwd) {}
 
 bool
 TS3BaseTransport::isStarted() const

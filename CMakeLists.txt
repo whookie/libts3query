@@ -31,7 +31,7 @@ set(ts3query_testsrc "test/gtest_main.cpp")
 add_library(ts3query SHARED ${ts3query_src})
 add_executable(ts3query_test ${ts3query_testsrc})
 
-target_link_libraries(ts3query_test ts3query gtest pthread)
+target_link_libraries(ts3query_test ts3query gtest gmock pthread)
 
 if (BUILD_TESTING)
     enable_testing()

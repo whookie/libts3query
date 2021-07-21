@@ -9,6 +9,7 @@ class TelnetTransport : public ts3query::connection::transport::TS3BaseTransport
 {
 public:
     using TS3BaseTransport::TS3BaseTransport;
+    ~TelnetTransport();
 
     auto writeString(const std::string&) -> void;
     auto readUntil(char c, bool blocking = true) -> std::string;

@@ -11,6 +11,8 @@
 
 namespace ts3query::connection::transport {
 
+TelnetTransport::~TelnetTransport() { stop(); }
+
 void TelnetTransport::start()
 {
     if (isStarted())

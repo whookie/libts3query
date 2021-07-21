@@ -5,28 +5,12 @@
 
 namespace ts3query::connection {
 
-TS3ServerConnection::TS3ServerConnection(
-    const std::string& host,
-    uint16_t port,
-    const std::string& user,
-    const std::string& passwd,
-    std::unique_ptr<transport::TS3BaseTransport> transport
-    ) : ts3query::base::TS3Object()
-{
-    m_host = host;
-    m_port = port;
-    m_user = user;
-    m_passwd = passwd;
-    m_transport = std::move(transport);
+
+TS3ServerConnection::TS3ServerConnection(std::unique_ptr<transport::TS3BaseTransport> transport)
+    : ts3query::base::TS3Object() {
+        m_transport = std::move(transport);
 }
 
-std::unique_ptr<TS3ServerConnection> TS3ServerConnection::telnet(const std::string& host, uint16_t port)
-{
-    transport::TS3BaseTransport* transportMethod = new transport::TelnetTransport(host, port);
-    std::unique_ptr<transport::TS3BaseTransport> transportPtr(transportMethod);
-    TS3ServerConnection* serverConnection = new TS3ServerConnection(host, port, "", "", std::move(transportPtr));
-    return std::unique_ptr<TS3ServerConnection>(serverConnection);
-}
 
 void TS3ServerConnection::connect()
 {
@@ -37,10 +21,12 @@ void TS3ServerConnection::connect()
     m_transport->readUntil('\r');
 }
 
+
 void TS3ServerConnection::disconnect()
 {
     m_transport->stop();
 }
+
 
 ts3query::communication::TS3Response
 TS3ServerConnection::exec(const ts3query::communication::TS3Command& command) {
