@@ -7,7 +7,7 @@ namespace ts3query::connection::transport {
 
 class TS3BaseTransport : public ts3query::base::TS3Object {
 public:
-    TS3BaseTransport(const std::string& host, uint16_t port, const std::string& user, const std::string& passwd);
+    TS3BaseTransport(const std::string& host, uint16_t port);
     virtual ~TS3BaseTransport() = default;
 
     virtual auto writeString(const std::string&) -> void = 0;
@@ -21,8 +21,6 @@ public:
 protected:
     std::string m_host      { "127.0.0.1" };
     uint16_t m_port         { 10011 };
-    std::string m_user      { "" };
-    std::string m_passwd    { "" };
 
 private:
     bool m_isStarted = false;

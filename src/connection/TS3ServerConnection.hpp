@@ -27,6 +27,9 @@ public:
     ts3query::communication::TS3Response
     exec(const ts3query::communication::TS3Command& command);
 
+    // Additional factory methods
+    static TS3ServerConnection telnet(const std::string& host, uint16_t port);
+
 private:
     std::unique_ptr<transport::TS3BaseTransport> m_transport = nullptr;
 

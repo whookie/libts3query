@@ -41,4 +41,13 @@ TS3ServerConnection::exec(const ts3query::communication::TS3Command& command) {
     return ts3query::communication::TS3Response(ss.str());
 }
 
+
+TS3ServerConnection
+TS3ServerConnection::telnet(const std::string& host, uint16_t port)
+{
+    auto transport = new ts3query::connection::transport::TelnetTransport(host, port);
+    auto transport_ptr = std::unique_ptr<ts3query::connection::transport::TelnetTransport>(transport);
+    return TS3ServerConnection(std::move(transport_ptr));
+}
+
 }

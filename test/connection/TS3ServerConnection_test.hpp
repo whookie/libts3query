@@ -10,7 +10,7 @@ using ::testing::Return;
 
 TEST(TS3ServerConnection, error_execBeforeConnect)
 {
-    auto transport = std::unique_ptr<TransportMock>(new TransportMock("", 0, "", ""));
+    auto transport = std::unique_ptr<TransportMock>(new TransportMock("", 0));
     auto transportMock = transport.get();
     auto server = ts3query::connection::TS3ServerConnection(std::move(transport));
     
@@ -20,7 +20,7 @@ TEST(TS3ServerConnection, error_execBeforeConnect)
 
 TEST(TS3ServerConnection, success_execAfterConnect)
 {
-    auto transport = std::unique_ptr<TransportMock>(new TransportMock("", 0, "", ""));
+    auto transport = std::unique_ptr<TransportMock>(new TransportMock("", 0));
     auto transportMock = transport.get();
     auto server = ts3query::connection::TS3ServerConnection(std::move(transport));
 
@@ -38,4 +38,11 @@ TEST(TS3ServerConnection, success_execAfterConnect)
     EXPECT_EQ(response.code(), 0);
     EXPECT_EQ(response.message(), "ok");
     EXPECT_EQ(response.data().size(), 2);
+}
+
+TEST(TS3ServerConnection, telnetFactory)
+{
+    // Instance is not connected, and we cant really connect it without a valid server running
+    // So all we can assert is that no error is thrown
+    auto server = ts3query::connection::TS3ServerConnection::telnet("127.0.0.1", 10011);
 }
